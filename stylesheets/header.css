@@ -1,3 +1,9 @@
+.js-loading *,
+.js-loading *:before,
+.js-loading *:after {
+  animation-play-state: paused !important;
+}
+
 header {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -22,12 +28,13 @@ header {
 }
 
 header:before {
-  animation: fade-slide-down 2s .5s cubic-bezier(0, .5, 0, 1) forwards;
+  animation: no-transform 2s .5s cubic-bezier(0, .5, 0, 1) forwards;
   background: linear-gradient(to bottom,rgba(0, 0, 0, 0), rgba(0, 0, 0, .8)),
     url(../images/background.jpg) no-repeat bottom;
   background-size: cover;
   content: "";
   opacity: 0;
+  transform: translateY(-4rem);
   position: absolute;
   top: 0;
   right: 0;
@@ -65,21 +72,27 @@ header:after {
   z-index: 10;
 }
 
-/* Animations */
-@keyframes fade-slide-down {
-  0% {
-    opacity: 0;
-    transform: translateY(-4rem);
-  }
-  100% {
-    opacity: .8;
-    transform: none;
-  }
+.header-down-arrow {
+  animation: pulse 2s 3s ease-out infinite;
+  position: absolute;
+    bottom: 4vh;
+    left: 0;
+    right: 0;
+  text-align: center;
+  z-index: 10;
 }
 
-.animate-pop-in {
-  animation: pop-in .6s cubic-bezier(0, .9, .3, 1.2) forwards;
+.header-down-arrow img {
+  animation: no-transform 1s 1s ease-out forwards;
   opacity: 0;
+  transform: translateY(4rem);
+}
+
+/* Animations */
+.animate-pop-in {
+  animation: no-transform .6s cubic-bezier(0, .9, .3, 1.2) forwards;
+  opacity: 0;
+  transform: translateY(-4rem) scale(.8);
 }
 
 .rocky-dashed {
@@ -98,10 +111,20 @@ header:after {
   animation-delay: 1.1s;
 }
 
-@keyframes pop-in {
+@keyframes rotate-up {
+  100% {
+    transform: rotateZ(-4deg);
+  }
+}
+
+@keyframes pulse {
   0% {
-    opacity: 0;
-    transform: translateY(-4rem) scale(.8);
+    opacity: 1;
+    transform: none;
+  }
+  50% {
+    opacity: .8;
+    transform: scale(.8);
   }
   100% {
     opacity: 1;
@@ -109,8 +132,9 @@ header:after {
   }
 }
 
-@keyframes rotate-up {
+@keyframes no-transform {
   100% {
-    transform: rotateZ(-4deg);
+    opacity: 1;
+    transform: none;
   }
 }
